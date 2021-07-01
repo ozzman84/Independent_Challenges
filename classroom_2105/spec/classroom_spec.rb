@@ -20,4 +20,36 @@ RSpec.describe Classroom do
     expect(@classroom.students).to eq(["Mike", "Megan", "Ian"])
     expect(@classroom.yell_at_students).to eq(["MIKE", "MEGAN", "IAN"])
   end
+
+  it 'returns over_capacity' do
+    @classroom.add_student('Mike')
+    @classroom.add_student('Megan')
+    @classroom.add_student('Bob')
+
+    expect(@classroom.over_capacity?).to eq(false)
+
+    @classroom.add_student('Eve')
+    @classroom.add_student('Alice')
+
+    expect(@classroom.over_capacity?).to eq(true)
+  end
+
+  it 'can kick_out students' do
+    @classroom.add_student('Mike')
+    @classroom.add_student('Megan')
+    @classroom.add_student('Bob')
+    @classroom.add_student('James')
+    @classroom.add_student('Cat')
+    @classroom.add_student('Alice')
+
+    @classroom.kick_out
+
+    expect(@classroom.over_capacity?).to eq(true)
+
+    @classroom.kick_out
+
+    expect(@classroom.over_capacity?).to eq(false)
+
+    expect(@classroom.students).to eq(["Bob", "James", "Cat", "Alice"])
+  end
 end
