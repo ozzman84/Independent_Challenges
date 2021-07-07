@@ -20,7 +20,7 @@ RSpec.describe Hospital do
     expect(@seattle_grace.doctors).to eq([@meredith, @alex])
   end
 
-  it 'returns total_salary' do
+  it 'has total_salary' do
     expect(@seattle_grace.total_salary).to eq(190000)
   end
 

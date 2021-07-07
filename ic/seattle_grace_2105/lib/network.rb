@@ -3,7 +3,7 @@ class Network
               :hospitals
 
   def initialize(name)
-    @name      = name
+    @name = name
     @hospitals = []
   end
 
@@ -12,35 +12,35 @@ class Network
   end
 
   def highest_paid_doctor
-    baller_doc = @hospitals.flat_map(&:doctors)
-    baller_doc.max_by(&:salary)
+    doctor_list = @hospitals.flat_map(&:doctors)
+    doctor_list.max_by(&:salary)
   end
 
   def doctors_by_hospital
-    hospital_doc_list = Hash.new
-
+    doctor_hash = Hash.new { |hash, key| hash[key] = [] }
     @hospitals.each do |hospital|
-      hospital_doc_list[hospital] = hospital.doctors.map(&:name)
+      hospital.doctors.each do |doctor|
+        doctor_hash[hospital] << doctor.name
+      end
     end
-    hospital_doc_list
+    doctor_hash
   end
 
   def doctors_by_specialty
-    hash = Hash.new { |hash, key| hash[key] = [] }
-
+    doctors_hash = Hash.new { |hash, key| hash[key] = [] }
     @hospitals.each do |hospital|
-      hospital.doctors.each do |doctor|
-        hash[doctor.specialty] << doctor.name
+      hospital.doctors.group_by do |doctor|
+        doctors_hash[doctor.specialty] << doctor.name
       end
     end
-    hash
+    doctors_hash
   end
 
   def average_doctors_salary
-    salary_sum  = @hospitals.sum(&:total_salary)
-    doctors_sum = @hospitals.sum do |hospital|
+    salary_sum = @hospitals.sum(&:total_salary)
+    doctor_sum = @hospitals.sum do |hospital|
       hospital.doctors.length
     end
-    salary_sum.fdiv(doctors_sum)
+    salary_sum.fdiv(doctor_sum)
   end
 end

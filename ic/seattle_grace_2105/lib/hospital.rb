@@ -4,9 +4,9 @@ class Hospital
               :doctors
 
   def initialize(name, chief_of_surgery, doctors)
-    @name             = name
+    @name = name
     @chief_of_surgery = chief_of_surgery
-    @doctors          = doctors
+    @doctors = doctors
   end
 
   def total_salary
@@ -16,7 +16,6 @@ class Hospital
   def lowest_paid_doctor
     @doctors.min_by(&:salary).name
   end
-
 
   def specialties
     @doctors.map(&:specialty)
