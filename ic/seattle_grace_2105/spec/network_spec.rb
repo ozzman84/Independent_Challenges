@@ -40,14 +40,16 @@ RSpec.describe Network do
       })
     end
 
-pry(main)> gsmn.doctors_by_specialty
-# => {
-  "General Surgery" => ["Meredith Grey", "Miranda Bailey"],
-  "Pediatric Surgery" => ["Alex Karev"],
-  "Neurosurgery" => ["Derek Sheperd"]
-}
+    it 'returns doctors_by_specialty' do
+      expect(@gsmn.doctors_by_specialty).to eq({
+        "General Surgery" => ["Meredith Grey", "Miranda Bailey"],
+        "Pediatric Surgery" => ["Alex Karev"],
+        "Neurosurgery" => ["Derek Sheperd"]
+      })
+    end
 
-pry(main)> gsmn.average_doctors_salary
-# => 116250.00
+    it 'returngs average_doctors_salary' do
+      expect(@gsmn.average_doctors_salary).to eq(116250.00)
+    end
   end
 end

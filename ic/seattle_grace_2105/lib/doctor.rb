@@ -5,9 +5,9 @@ class Doctor
               :salary
 
   def initialize(hash)
-    @name = hash[:name]
+    @name      = hash[:name]
     @specialty = hash[:specialty]
     @education = hash[:education]
-    @salary = hash[:salary]
+    @salary    = hash[:salary]
   end
 end
