@@ -14,7 +14,7 @@ class WorldCup
   end
 
   def all_players_by_position
-    player_list = Hash.new ( [] )
+    player_list = Hash.new { |h, k| h[k] = [] }
     @teams.each do |team|
       team.players.flat_map do |player|
         player_list[player.position] << player
